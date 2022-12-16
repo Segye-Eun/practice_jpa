@@ -18,7 +18,8 @@
             <property name="hibernate.use_sql_comments" value="true"/>
             <!-- value 값만큼 한번에 모아서 db에 보냄 -->
             <property name="hibernate.jdbc.batch_size" value="10"/>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+            <!-- DDL은 개발서버에서만 사용! 실서버에서는 사용x -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 </persistence>
