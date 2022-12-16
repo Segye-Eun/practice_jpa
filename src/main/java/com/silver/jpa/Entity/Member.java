@@ -14,6 +14,14 @@ public class Member {
 //    @Column(name = "user_name")
     private String name;
 
+    public Member(){
+
+    }
+    public Member(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
