@@ -19,7 +19,11 @@
             <!-- value 값만큼 한번에 모아서 db에 보냄 -->
             <property name="hibernate.jdbc.batch_size" value="10"/>
             <!-- DDL은 개발서버에서만 사용! 실서버에서는 사용x -->
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <!-- 운영 장비에는 절대 create, create-drop, update 사용하면 안됨 -->
+            <!-- 개발 초기단계는 create or update -->
+            <!-- 테스트 서버는 update or validate -->
+            <!-- 스테이징과 운영 서버는 validate or none -->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,6 +1,8 @@
 package com.silver.jpa;
 
 import com.silver.jpa.Entity.Member;
+import com.silver.jpa.Entity.RoleType;
+import com.silver.jpa.Entity.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -77,18 +79,74 @@ public class JpaMain {
 //            // 커핏 전에 쿼리 발동(플러시를 하더라도 1차캐쉬가 다 지워지진않는다, 쓰기지연 SQL 저장소에 있는게 db에 반영이 되는것일뿐)
 //            em.flush();
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
+//            Member member = em.find(Member.class, 150L);
+//            member.setName("AAAAA");
 
 //            // 준영속 -> 특정 엔티티만 영속성 컨텍스트에서 빠지게 됨 -> 업데이터 안됨
 //            em.detach(member);
 
-            // 영속성 컨텍스트 내에 있는것을 통으로 날려버림
-            em.clear();
-            // 1차 캐시가 다 날아가서 다시 db에서 조회한다
-            Member member2 = em.find(Member.class, 150L);
+//            // 영속성 컨텍스트 내에 있는것을 통으로 날려버림
+//            em.clear();
+//            // 1차 캐시가 다 날아가서 다시 db에서 조회한다
+//            Member member2 = em.find(Member.class, 150L);
+//            System.out.println("=======================");
 
-            System.out.println("=======================");
+//            Member member = new Member();
+//            member.setUsername("C");
+//            member.setRoleType(RoleType.ADMIN);
+//            em.persist(member);
+
+//            Member member1 = new Member();
+//            member1.setUsername("A");
+//
+//            Member member2 = new Member();
+//            member2.setUsername("B");
+//
+//            Member member3 = new Member();
+//            member3.setUsername("C");
+//
+//            System.out.println("=====================");
+//
+//            //DB SEQ = 1     |   1
+//            //DB SEQ = 51     |   2
+//            //DB SEQ = 51     |   3
+//
+//            em.persist(member1); //1, 51
+//            em.persist(member2); // 메모리에서 호출
+//            em.persist(member3); // 메모리에서 호출
+//
+//            System.out.println("member1 = " + member1.getId());
+//            System.out.println("member2 = " + member2.getId());
+//            System.out.println("member3 = " + member3.getId());
+//
+//            System.out.println("=====================");
+
+            //단방향 연관관계
+            // 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+
+            Team findTeam =  findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
+
+            // 업데이트
+            Team newTeam = em.find(Team.class, 100L);
+            findMember.setTeam(newTeam);
+            //단방향 끝
+
+
+
             // 커밋하는 순간에 쿼리로 넘어간다
             tx.commit();
         }catch (Exception e){
