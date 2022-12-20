@@ -1,12 +1,15 @@
 package com.silver.jpa;
 
+import com.silver.jpa.Entity.Item;
 import com.silver.jpa.Entity.Member;
+import com.silver.jpa.Entity.Movie;
 import com.silver.jpa.Entity.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class JpaMain {
@@ -155,6 +158,30 @@ public class JpaMain {
 //            team.getMembers().add(member);
 //
 //            em.persist(team);
+
+
+//            Movie movie = new Movie();
+//            movie.setDirector("aaaa");
+//            movie.setActor("bbbb");
+//            movie.setName("바람과함께사라지다");
+//            movie.setPrice(10000);
+//
+//            em.persist(movie);
+//
+//            em.flush();
+//            em.clear();
+//
+////            Movie findMovie = em.find(Movie.class, movie.getId());
+//            Item item = em.find(Item.class, movie.getId());
+//            System.out.println("item = " + item);
+
+            Member member = new Member();
+            member.setUsername("user1");
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
 
 
 

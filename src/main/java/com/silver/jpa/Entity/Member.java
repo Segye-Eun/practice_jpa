@@ -1,6 +1,7 @@
 package com.silver.jpa.Entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ", // 매핑할 데이터베이스 시퀀스 이름
         initialValue = 1, allocationSize = 50)
-public class Member {
+public class Member extends BaseEntity{
 
 //    @Id
 //    private long id;
@@ -84,6 +85,8 @@ public class Member {
     // 다대다 -> 다대일, 일대다로 나눔
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
+
+
 
     public Long getId() {
         return id;
