@@ -1,9 +1,6 @@
 package com.silver.jpa.Entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 //@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
@@ -95,7 +92,10 @@ public class Member {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void changeTeam(Team team) {
         this.team = team;
+        // 연관관계 편의 메소드
+        team.getMembers().add(this);
     }
+
 }

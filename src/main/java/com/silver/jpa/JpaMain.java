@@ -1,7 +1,6 @@
 package com.silver.jpa;
 
 import com.silver.jpa.Entity.Member;
-import com.silver.jpa.Entity.RoleType;
 import com.silver.jpa.Entity.Team;
 
 import javax.persistence.EntityManager;
@@ -129,21 +128,23 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+            member.changeTeam(team); // **
             em.persist(member);
 
-            em.flush();
-            em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
+//            team.getMembers().add(member); // ** 양쪽에 값을 다 설정해야한다 -> flush, clear를 사용할 경우는 필요없음
 
-            Team findTeam =  findMember.getTeam();
-            System.out.println("findTeam = " + findTeam.getName());
+//            em.flush();
+//            em.clear();
 
-            // 업데이트
-            Team newTeam = em.find(Team.class, 100L);
-            findMember.setTeam(newTeam);
-            //단방향 끝
+            Member findMember = em.find(Member.class, member.getId()); // 1차 캐시
+            List<Member> members = findMember.getTeam().getMembers();
+
+            System.out.println("===========================");
+            for(Member m : members){
+                System.out.println("m = " + m.getUsername());
+            }
+            System.out.println("===========================");
 
 
 
