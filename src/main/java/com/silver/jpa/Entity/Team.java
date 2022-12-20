@@ -12,9 +12,9 @@ public class Team {
     private Long id;
     private String name;
 
-//    //다대일
-//    @OneToMany(mappedBy = "team")
-//    private List<Member> members = new ArrayList<>();
+    //다대일
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<>();
 
 //    //일대다
 //    @OneToMany

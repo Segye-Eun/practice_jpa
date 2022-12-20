@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="146eda68-1eb9-49e6-8fb7-1702fce35d2d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Album.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/BaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Team.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silver/jpa/JpaMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/JpaMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +105,7 @@
       <workItem from="1670505406789" duration="6739000" />
       <workItem from="1671157514708" duration="16196000" />
       <workItem from="1671413256657" duration="15001000" />
-      <workItem from="1671443977214" duration="13661000" />
+      <workItem from="1671443977214" duration="15112000" />
     </task>
     <task id="LOCAL-00001" summary="JPA 기본 설정">
       <created>1671159871447</created>

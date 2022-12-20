@@ -175,8 +175,9 @@ public class JpaMain {
 //            Item item = em.find(Item.class, movie.getId());
 //            System.out.println("item = " + item);
 
-            Member member = new Member();
-            member.setUsername("user1");
+            Member member = em.find(Member.class, 1L);
+            printMember(member);
+//            printMemberAndTeam(member);
 
             em.persist(member);
 
@@ -193,6 +194,18 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static void printMember(Member member) {
+        System.out.println("member = " + member.getUsername());
+    }
+
+    private static void printMemberAndTeam(Member member) {
+        String username = member.getUsername();
+        System.out.println("username = " + username);
+
+        Team team = member.getTeam();
+        System.out.println("team = " + team.getName());
     }
 
     private static Member saveMember(EntityManager em) {

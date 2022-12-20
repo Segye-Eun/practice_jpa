@@ -72,10 +72,10 @@ public class Member extends BaseEntity{
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
-//    // 다대일
-//    @ManyToOne
-//    @JoinColumn(name = "TEAM_ID")
-//    private Team team;
+    // 다대일
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
 //    //다대다
 //    @ManyToMany
@@ -104,7 +104,15 @@ public class Member extends BaseEntity{
         this.username = username;
     }
 
-//    public void changeTeam(Team team) {
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    //    public void changeTeam(Team team) {
 //        this.team = team;
 //        // 연관관계 편의 메소드
 //        team.getMembers().add(this);
