@@ -120,31 +120,41 @@ public class JpaMain {
 //
 //            System.out.println("=====================");
 
-            //단방향 연관관계
-            // 저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
-            Member member = new Member();
-            member.setUsername("member1");
-            member.changeTeam(team); // **
-            em.persist(member);
+//            //단방향 연관관계
+//            // 저장
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.changeTeam(team); // **
+//            em.persist(member);
 
 
 //            team.getMembers().add(member); // ** 양쪽에 값을 다 설정해야한다 -> flush, clear를 사용할 경우는 필요없음
 
 //            em.flush();
 //            em.clear();
+//
+//            Member findMember = em.find(Member.class, member.getId()); // 1차 캐시
+//            List<Member> members = findMember.getTeam().getMembers();
+//
+//            System.out.println("===========================");
+//            for(Member m : members){
+//                System.out.println("m = " + m.getUsername());
+//            }
+//            System.out.println("===========================");
 
-            Member findMember = em.find(Member.class, member.getId()); // 1차 캐시
-            List<Member> members = findMember.getTeam().getMembers();
-
-            System.out.println("===========================");
-            for(Member m : members){
-                System.out.println("m = " + m.getUsername());
-            }
-            System.out.println("===========================");
+//            //일대다
+//            Member member = saveMember(em);
+//
+//            Team team = new Team();
+//            team.setName("teamA");
+//            //
+//            team.getMembers().add(member);
+//
+//            em.persist(team);
 
 
 
@@ -156,5 +166,13 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static Member saveMember(EntityManager em) {
+        Member member = new Member();
+        member.setUsername("member1");
+
+        em.persist(member);
+        return member;
     }
 }

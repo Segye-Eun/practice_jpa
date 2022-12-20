@@ -5,21 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Team {
+public class Product {
 
     @Id @GeneratedValue
-    @Column(name = "TEAM_ID")
     private Long id;
+
     private String name;
 
-//    //다대일
-//    @OneToMany(mappedBy = "team")
+//    // 다대다
+//    @ManyToMany(mappedBy = "products")
 //    private List<Member> members = new ArrayList<>();
 
-//    //일대다
-//    @OneToMany
-//    @JoinColumn(name = "TEAM_ID")
-//    private List<Member> members = new ArrayList<>();
+    // 다대다 -> 다대일, 일대다로 나눔
+    @OneToMany(mappedBy = "product")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
+
+
 
     public Long getId() {
         return id;
@@ -36,5 +37,4 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
-
 }

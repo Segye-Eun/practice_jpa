@@ -1,6 +1,8 @@
 package com.silver.jpa.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 //@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
@@ -65,12 +67,23 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+//    // 다대일
+//    @ManyToOne
+//    @JoinColumn(name = "TEAM_ID")
+//    private Team team;
+
+//    //다대다
+//    @ManyToMany
+//    @JoinTable(name = "MEMBER_PRODUCT")
+//    private List<Product> products = new ArrayList<>();
+
+    // 다대다 -> 다대일, 일대다로 나눔
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -88,14 +101,9 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void changeTeam(Team team) {
-        this.team = team;
-        // 연관관계 편의 메소드
-        team.getMembers().add(this);
-    }
-
+//    public void changeTeam(Team team) {
+//        this.team = team;
+//        // 연관관계 편의 메소드
+//        team.getMembers().add(this);
+//    }
 }
