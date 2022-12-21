@@ -68,9 +68,9 @@ public class Member extends BaseEntity{
     @Column(name = "USERNAME")
     private String username;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+//    @OneToOne
+//    @JoinColumn(name = "LOCKER_ID")
+//    private Locker locker;
 
     // 다대일
     @ManyToOne
@@ -82,9 +82,9 @@ public class Member extends BaseEntity{
 //    @JoinTable(name = "MEMBER_PRODUCT")
 //    private List<Product> products = new ArrayList<>();
 
-    // 다대다 -> 다대일, 일대다로 나눔
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+//    // 다대다 -> 다대일, 일대다로 나눔
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberProduct> memberProducts = new ArrayList<>();
 
 
 

@@ -175,15 +175,26 @@ public class JpaMain {
 //            Item item = em.find(Item.class, movie.getId());
 //            System.out.println("item = " + item);
 
-            Member member = em.find(Member.class, 1L);
-            printMember(member);
-//            printMemberAndTeam(member);
+//            Member member = em.find(Member.class, 1L);
+//            printMember(member);
+////            printMemberAndTeam(member);
+//
+//            em.persist(member);
+//
 
+            Member member = new Member();
+            member.setUsername("hello");
+            
             em.persist(member);
-
+            
             em.flush();
             em.clear();
-
+            
+            //
+//            Member findMember = em.find(Member.class, member.getId());
+            Member findMember = em.getReference(Member.class, member.getId());
+//            System.out.println("findMember.id = " + findMember.getId());
+//            System.out.println("findMember.userName = " + findMember.getUsername());
 
 
             // 커밋하는 순간에 쿼리로 넘어간다
