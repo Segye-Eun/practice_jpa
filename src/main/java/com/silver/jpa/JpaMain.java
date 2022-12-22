@@ -4,6 +4,7 @@ import com.silver.jpa.Entity.Item;
 import com.silver.jpa.Entity.Member;
 import com.silver.jpa.Entity.Movie;
 import com.silver.jpa.Entity.Team;
+import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -175,14 +176,102 @@ public class JpaMain {
 //            Item item = em.find(Item.class, movie.getId());
 //            System.out.println("item = " + item);
 
-            Member member = em.find(Member.class, 1L);
-            printMember(member);
+//            Member member = em.find(Member.class, 1L);
+//            printMember(member);
 //            printMemberAndTeam(member);
 
-            em.persist(member);
+//            em.persist(member);
+
+//            Member member1 = new Member();
+//            member1.setUsername("hello1");
+//            em.persist(member1);
+//
+//            Member member2 = new Member();
+//            member2.setUsername("hello2");
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
+
+//            Member m1 = em.find(Member.class, member1.getId());
+////            Member m2 = em.find(Member.class, member2.getId());
+//            Member m2 = em.getReference(Member.class, member2.getId());
+//            // find로 찾은 엔티티는 서로 == 비교시 true 반환
+//            // 프록시랑 비교하면 false 반환
+//            System.out.println("m1 == m2 : " + (m1.getClass() == m2.getClass()));
+//            // 타입이 같은지로 비교를 해야한다
+//            System.out.println("m1 == m2 : " + (m1 instanceof Member));
+//            System.out.println("m1 == m2 : " + (m2 instanceof Member));
+//
+//            // 이것은 영속상태 실제 엔티티
+//            System.out.println("m1 = " + m1.getClass());
+//
+//            Member reference = em.getReference(Member.class, member1.getId());
+//            // 이미 영속성 컨텍스트에 실제 엔티티가 있어서 프록시 객체 대신 엔티티 반환
+//            System.out.println("reference.getClass() = " + reference.getClass());
+//            // 같은 영속성 컨텍스트에서 조회한 것이라 true 반환
+//            System.out.println("m1 = reference : " + (m1 == reference));
+            
+
+//            // 프록시는 껍데기만 있는 가짜이다 -> 겉모양이 같다
+//            // 엔티티를 상속 받아서 만들어짐
+//            // 프록시 객체는 실제 객체의 참조(타겟)을 보관
+//            // 첫 초기화 요청 이후에는 초기화 되지않는다(이미 조회가 끝나서 실제 엔티티 생성)
+//
+//            Member findMember = em.getReference(Member.class, member.getId());
+//            //class com.silver.jpa.Entity.Member$HibernateProxy$ln4LR21b 이런식으로 프록시 클래스로 나온다(가짜)
+//            System.out.println("findMember.getClass() = " + findMember.getClass());
+//            // 레퍼런스로 찾을때 이미 id로 조회했기 때문에 쿼리 호출 없이 그냥 가져올수 있음.
+//            System.out.println("findMember.getId() = " + findMember.getId());
+//            // 이름은 프록시 객체 내부에 없어서 db에서 가져와야 하기 때문에 쿼리를 호출한다.
+//            System.out.println("findMember.getUsername() = " + findMember.getUsername());
+//            // 초기화 되었다고 해서 값만 채워지는것이지 실제 엔티티로 바뀌는게 아니다
+//            // 프록시 객체를 통해서 실제 엔티티에 접근이 가능한것뿐
+//            // ==으로 비교 불가, instance of 를 사용해서 비교해야한다
+//            System.out.println("findMember.getClass() = " + findMember.getClass());
+            
+//            Member refMember = em.getReference(Member.class, member1.getId());
+//            System.out.println("refMember = " + refMember.getClass()); // proxy
+//
+//            // 프록시를 호출하고 초기화를 안 시킬경우 find 해도 프록시가 호출됨
+//            Member findMember = em.find(Member.class, member1.getId());
+//            System.out.println("findMember = " + findMember.getClass()); // Member -> 실제 엔티티가 아니라 프록시로 반환
+//
+//            // 그래서 true 가 나옴
+//            System.out.println("refMember == findMember = " + (refMember == findMember));
+
+//            // 자주 볼 수 있는 이슈 사항
+//            Member refMember = em.getReference(Member.class, member1.getId());
+//            System.out.println("refMember = " + refMember.getClass()); // proxy
+//
+//            // 영속성 컨텍스트에서 제외, 영속성 컨텍스트를 클리어, 엔티티매니저를 닫아버리면
+//            em.detach(refMember);
+////            em.close();
+////            em.clear();
+//
+//            // 영속성 컨텍스트의 도움을 받지 못하기 때문에
+//            // could not initialize proxy 라고 뜨면서 익셉션 발생
+//            // 프록시를 초기화 시킬 수 없다
+//            refMember.getUsername();
+
+
+            Member member1 = new Member();
+            member1.setUsername("hello1");
+            em.persist(member1);
 
             em.flush();
             em.clear();
+
+            Member refMember = em.getReference(Member.class, member1.getId());
+            System.out.println("refMember = " + refMember.getClass()); // proxy
+            // 프록시 인스턴스의 초기화 여부 확인 -> true or false 반환
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+//            refMember.getUsername(); // 강제 호출해서 초기화
+            Hibernate.initialize(refMember); // 강제 초기화
+            // 초기화 후에는 true 반환
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+
+
 
 
 
