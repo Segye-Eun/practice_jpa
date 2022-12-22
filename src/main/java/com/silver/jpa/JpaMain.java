@@ -1,9 +1,6 @@
 package com.silver.jpa;
 
-import com.silver.jpa.Entity.Item;
-import com.silver.jpa.Entity.Member;
-import com.silver.jpa.Entity.Movie;
-import com.silver.jpa.Entity.Team;
+import com.silver.jpa.Entity.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
@@ -182,6 +179,7 @@ public class JpaMain {
 
 //            em.persist(member);
 
+//            // 프록시
 //            Member member1 = new Member();
 //            member1.setUsername("hello1");
 //            em.persist(member1);
@@ -254,26 +252,80 @@ public class JpaMain {
 //            // 프록시를 초기화 시킬 수 없다
 //            refMember.getUsername();
 
+//            Member refMember = em.getReference(Member.class, member1.getId());
+//            System.out.println("refMember = " + refMember.getClass()); // proxy
+//            // 프록시 인스턴스의 초기화 여부 확인 -> true or false 반환
+//            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+////            refMember.getUsername(); // 강제 호출해서 초기화
+//            Hibernate.initialize(refMember); // 강제 초기화
+//            // 초기화 후에는 true 반환
+//            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
 
-            Member member1 = new Member();
-            member1.setUsername("hello1");
-            em.persist(member1);
+
+//            // 즉시 로딩과 지연 로딩
+//
+//            Team team = new Team();
+//            team.setName("teamA");
+//            em.persist(team);
+//
+//            Member member1 = new Member();
+//            member1.setUsername("hello1");
+//            member1.setTeam(team);
+//            em.persist(member1);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Member m = em.getReference(Member.class, member1.getId());
+//            // fetch lazy로 설정하면 프록시로 조회됨 -> 지연 로딩
+//            // fetch eager를 설정하면 프록시가 아니라 실제 엔티티를 조회해온다 -> 즉시 로딩
+//            System.out.println("m = " + m.getTeam().getClass());
+//
+//            System.out.println("=======================");
+//            // 이건 그냥 불러오는거라서 초기화 아님
+//            m.getTeam();
+//            // 실제 team을 사용하는 시점에 초기화
+//            // team을 초기화 시키기 -> 이때 db에서 조회
+//            // 즉시 로딩 시에는 초기화할 필요없지 영속성컨텍스트에서 바로 조회
+//            m.getTeam().getName();
+//            System.out.println("=======================");
+
+//            //영속성 전이와 고아 객체
+//
+//            //cascade(영속성 전이)
+//            // 연관관계를 매핑하는 것과 아무 관련이 없음
+//            Child child1 = new Child();
+//            Child child2 = new Child();
+//
+//            Parent parent = new Parent();
+//            parent.addChild(child1);
+//            parent.addChild(child2);
+//
+//            em.persist(parent);
+////            em.persist(child1);
+////            em.persist(child2);
+
+            // 고아 객체
+            // 참조하는 곳이 하나일 때 사용해야함
+            // 특정엔티티가 개인 소유할 때 사용
+            // 일대일, 일대다에서만 가능
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+            em.persist(child1);
+            em.persist(child2);
 
             em.flush();
             em.clear();
 
-            Member refMember = em.getReference(Member.class, member1.getId());
-            System.out.println("refMember = " + refMember.getClass()); // proxy
-            // 프록시 인스턴스의 초기화 여부 확인 -> true or false 반환
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
-//            refMember.getUsername(); // 강제 호출해서 초기화
-            Hibernate.initialize(refMember); // 강제 초기화
-            // 초기화 후에는 true 반환
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+            Parent findParent = em.find(Parent.class, parent.getId());
 
-
-
-
+            em.remove(findParent);
 
             // 커밋하는 순간에 쿼리로 넘어간다
             tx.commit();

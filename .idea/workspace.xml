@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="146eda68-1eb9-49e6-8fb7-1702fce35d2d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Child.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Parent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Locker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Locker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/Entity/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silver/jpa/JpaMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silver/jpa/JpaMain.java" afterDir="false" />
     </list>
@@ -106,7 +107,7 @@
       <workItem from="1671157514708" duration="16196000" />
       <workItem from="1671413256657" duration="15001000" />
       <workItem from="1671443977214" duration="15112000" />
-      <workItem from="1671677858221" duration="2981000" />
+      <workItem from="1671677858221" duration="6630000" />
     </task>
     <task id="LOCAL-00001" summary="JPA 기본 설정">
       <created>1671159871447</created>
@@ -143,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671516952221</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="프록시 관련 기본 -esk-">
+      <created>1671680985938</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671680985938</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +186,7 @@
     <MESSAGE value="Entity mapping 강의 -esk-" />
     <MESSAGE value="단방향 강의 -esk-" />
     <MESSAGE value="양방향 강의 -esk-" />
-    <option name="LAST_COMMIT_MESSAGE" value="양방향 강의 -esk-" />
+    <MESSAGE value="프록시 관련 기본 -esk-" />
+    <option name="LAST_COMMIT_MESSAGE" value="프록시 관련 기본 -esk-" />
   </component>
 </project>

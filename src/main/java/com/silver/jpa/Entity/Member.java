@@ -73,7 +73,12 @@ public class Member extends BaseEntity{
 //    private Locker locker;
 
     // 다대일
-    @ManyToOne
+    // lazy로 하면 team을 프록시로 조회 -> 지연 로딩(실무에서는 가급적 지연로딩만 씀)
+    // 다대일과 1대1은 기본이 즉시로딩 -> 지연로딩으로 변경
+    // 일대다, 다대다는 기본이 지연로딩
+    @ManyToOne(fetch = FetchType.LAZY)
+    // eager로 하면 team까지 같이 조회 -> 즉시 로딩(실무에서는 거의 안씀) -> 예상하지 못한 sql이 발생함
+//    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
